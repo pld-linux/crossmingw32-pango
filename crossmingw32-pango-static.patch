@@ -1,0 +1,24 @@
+diff -urN pango-1.14.10/configure.in pango-1.14.10.new/configure.in
+--- pango-1.14.10/configure.in	2007-01-29 22:17:39.000000000 +0100
++++ pango-1.14.10.new/configure.in	2007-02-20 22:03:56.914555570 +0100
+@@ -634,17 +634,17 @@
+ # Note that -module isn't included here since automake needs to see it to know
+ # that something like pango-arabic-fc.la is a valid libtool archive
+ #
+-LIBRARY_LIBTOOL_OPTIONS="-version-info $VERSION_INFO"
++LIBRARY_LIBTOOL_OPTIONS="-version-info $VERSION_INFO -static"
+ MODULE_LIBTOOL_OPTIONS="-export-dynamic -avoid-version"
+ if test "$pango_os_win32" = yes; then
+     # We currently use .def files on Windows
+     true
+-    LIBRARY_LIBTOOL_OPTIONS="$LIBRARY_LIBTOOL_OPTIONS -no-undefined"
++    LIBRARY_LIBTOOL_OPTIONS="$LIBRARY_LIBTOOL_OPTIONS -no-undefined -static"
+     MODULE_LIBTOOL_OPTIONS="$MODULE_LIBTOOL_OPTIONS -no-undefined"
+ else
+     # libtool option to control which symbols are exported
+     # right now, symbols starting with '_' are not exported
+-    LIBRARY_LIBTOOL_OPTIONS="$LIBRARY_LIBTOOL_OPTIONS "'-export-symbols-regex "^pango_.*"'
++    LIBRARY_LIBTOOL_OPTIONS="$LIBRARY_LIBTOOL_OPTIONS "'-export-symbols-regex "^pango_.* -static"'
+     MODULE_LIBTOOL_OPTIONS="$MODULE_LIBTOOL_OPTIONS "'-export-symbols-regex "^script_engine_.*"'
+ fi
+ AC_SUBST(LIBRARY_LIBTOOL_OPTIONS)
