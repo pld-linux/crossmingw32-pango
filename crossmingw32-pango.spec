@@ -1,28 +1,14 @@
-#
-# TODO:
-# - update arch_confdir patch
-#
-# Conditional build:
-%bcond_with	arch_confdir	# build with arch-dependant config dir
-#
 Summary:	System for layout and rendering of internationalized text - cross Mingw32 version
-Summary(pl.UTF-8):System renderowania międzynarodowego tekstu - wersja skrośna dla Mingw32
-Summary(pt_BR.UTF-8):Sistema para layout e renderização de texto internacionalizado
+Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla Mingw32
 %define		_realname   pango
 Name:		crossmingw32-%{_realname}
-%define		_mainver 1.15
-Version:	%{_mainver}.6
+Version:	1.16.0
 Release:	1
 License:	LGPL
-Group:		X11/Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/pango/%{_mainver}/%{_realname}-%{version}.tar.bz2
-# Source0-md5:	b122a41e2ba832a24013c153dd52c982
-Patch0:		%{name}-noexamples.patch
-Patch1:		%{name}-static.patch
-Patch2:		%{_realname}-xfonts.patch
-Patch3:		%{_realname}-arch_confdir.patch
-Patch4:		%{name}-cairo.patch
-Patch5:		%{name}-static_and_dll.patch
+Group:		Development/Libraries
+Source0:	http://ftp.gnome.org/pub/gnome/sources/pango/1.16/%{_realname}-%{version}.tar.bz2
+# Source0-md5:	3ff23998479e98c5dd9a7eaf08f6249d
+Patch0:		%{_realname}-xfonts.patch
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.7
@@ -30,11 +16,12 @@ BuildRequires:	crossmingw32-cairo >= 1.2.4
 BuildRequires:	crossmingw32-fontconfig >= 2.4.0
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-glib2 >= 2.12.9
-BuildRequires:	crossmingw32-pkgconfig
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires:	crossmingw32-cairo >= 1.2.4
+Requires:	crossmingw32-fontconfig >= 2.4.0
 Requires:	crossmingw32-freetype >= 2.1.7
 Requires:	crossmingw32-glib2 >= 2.12.9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -44,33 +31,41 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		target			i386-mingw32
 %define		target_platform 	i386-pc-mingw32
 %define		arch			%{_prefix}/%{target}
-%define		gccarch			%{_prefix}/lib/gcc-lib/%{target}
-%define		gcclib			%{_prefix}/lib/gcc-lib/%{target}/%{version}
 
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
 %define		_pkgconfigdir		%{_prefix}/lib/pkgconfig
+%define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
 
 %description
-System for layout and rendering of internationalized text.
+System for layout and rendering of internationalized text (cross
+mingw32 version).
 
 %description -l pl.UTF-8
-System obsługi i renderowania międzynarodowego tekstu.
+System obsługi i renderowania międzynarodowego tekstu (wersja skrośna
+mingw32).
 
-%description -l pt_BR.UTF-8
-Pango é um sistema para layout e renderização de texto
-internacionalizado.
+%package dll
+Summary:	DLL pango libraries for Windows
+Summary(pl.UTF-8):	Biblioteki DLL pango dla Windows
+Group:		Applications/Emulators
+Requires:	crossmingw32-cairo-dll >= 1.2.4
+Requires:	crossmingw32-fontconfig-dll >= 2.4.0
+Requires:	crossmingw32-freetype-dll >= 2.1.7
+Requires:	crossmingw32-glib2-dll >= 2.12.9
+Requires:	wine
+
+%description dll
+DLL pango libraries for Windows.
+
+%description dll -l pl.UTF-8
+Biblioteki DLL pango dla Windows.
 
 %prep
 %setup -q -n %{_realname}-%{version}
-#%patch0 -p1
-#%patch1 -p1
-%patch2 -p1
-%{?with_arch_confdir:%patch3 -p1}
-%patch4 -p1
-#%patch5 -p1
+%patch0 -p1
 
 %build
 export PKG_CONFIG_PATH=%{_pkgconfigdir}
@@ -85,19 +80,23 @@ export PKG_CONFIG_PATH=%{_pkgconfigdir}
 	--with-fribidi \
 	--enable-static
 
-#%{__sed} -i -e 's/^deplibs_check_method=.*/deplibs_check_method="pass_all"/' libtool
-
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	pkgconfigdir=%{_pkgconfigdir}
+	DESTDIR=$RPM_BUILD_ROOT
 
-#> $RPM_BUILD_ROOT%{_sysconfdir}/pango%{?with_arch_confdir:-%{_host_cpu}}/pango.modules
+install -d $RPM_BUILD_ROOT%{_dlldir}
+mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
+%if 0%{!?debug:1}
+%{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
+%{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
+%endif
+
+rm -rf $RPM_BUILD_ROOT%{_datadir}/{gtk-doc,man}
 # useless (modules loaded through libgmodule)
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/1.6.0/modules/*.{la,a}
 
@@ -107,8 +106,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README
-%{_libdir}/lib*.la
-%{_libdir}/libpango*.a
-%{_bindir}/*.dll
-%{_pkgconfigdir}/*
-%{_includedir}/*
+%{_libdir}/libpango*-1.0.dll.a
+%{_libdir}/libpango*-1.0.la
+%{_libdir}/pango*-1.0.def
+%{_includedir}/pango-1.0
+%{_pkgconfigdir}/pango*.pc
+
+%files dll
+%defattr(644,root,root,755)
+%{_dlldir}/libpango*-1.0-*.dll
