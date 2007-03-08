@@ -15,6 +15,7 @@ BuildRequires:	automake >= 1:1.7
 BuildRequires:	crossmingw32-cairo >= 1.2.4
 BuildRequires:	crossmingw32-fontconfig >= 2.4.0
 BuildRequires:	crossmingw32-freetype >= 2.1.7
+BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-glib2 >= 2.12.9
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
