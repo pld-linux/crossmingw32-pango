@@ -1,14 +1,14 @@
 Summary:	System for layout and rendering of internationalized text - cross Mingw32 version
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla Mingw32
-%define		_realname   pango
-Name:		crossmingw32-%{_realname}
-Version:	1.16.4
+%define		realname   pango
+Name:		crossmingw32-%{realname}
+Version:	1.18.0
 Release:	1
-License:	LGPL
+License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/pango/1.16/%{_realname}-%{version}.tar.bz2
-# Source0-md5:	025e2ac5e40cac163aae4653aeef559c
-Patch0:		%{_realname}-xfonts.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.18/%{realname}-%{version}.tar.bz2
+# Source0-md5:	5a3cbda73be7277a20d97f2bc89b0737
+Patch0:		%{realname}-xfonts.patch
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.7
@@ -16,7 +16,7 @@ BuildRequires:	crossmingw32-cairo >= 1.4.0
 BuildRequires:	crossmingw32-fontconfig >= 2.4.0
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-gcc
-BuildRequires:	crossmingw32-glib2 >= 2.12.11
+BuildRequires:	crossmingw32-glib2 >= 2.14.0
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
@@ -24,7 +24,7 @@ BuildRequires:	rpmbuild(macros) >= 1.197
 Requires:	crossmingw32-cairo >= 1.4.0
 Requires:	crossmingw32-fontconfig >= 2.4.0
 Requires:	crossmingw32-freetype >= 2.1.7
-Requires:	crossmingw32-glib2 >= 2.12.11
+Requires:	crossmingw32-glib2 >= 2.14.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -55,7 +55,7 @@ Group:		Applications/Emulators
 Requires:	crossmingw32-cairo-dll >= 1.4.0
 Requires:	crossmingw32-fontconfig-dll >= 2.4.0
 Requires:	crossmingw32-freetype-dll >= 2.1.7
-Requires:	crossmingw32-glib2-dll >= 2.12.11
+Requires:	crossmingw32-glib2-dll >= 2.14.0
 Requires:	wine
 
 %description dll
@@ -65,7 +65,7 @@ DLL pango libraries for Windows.
 Biblioteki DLL pango dla Windows.
 
 %prep
-%setup -q -n %{_realname}-%{version}
+%setup -q -n %{realname}-%{version}
 %patch0 -p1
 
 %build
