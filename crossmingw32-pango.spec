@@ -31,7 +31,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		target			i386-mingw32
 %define		target_platform 	i386-pc-mingw32
-%define		arch			%{_prefix}/%{target}
 
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
