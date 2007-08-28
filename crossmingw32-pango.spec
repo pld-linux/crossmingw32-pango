@@ -19,7 +19,7 @@ BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-glib2 >= 2.14.0
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 1:0.15
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires:	crossmingw32-cairo >= 1.4.0
 Requires:	crossmingw32-fontconfig >= 2.4.0
