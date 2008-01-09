@@ -2,12 +2,12 @@ Summary:	System for layout and rendering of internationalized text - cross Mingw
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla Mingw32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.18.3
+Version:	1.18.4
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.18/%{realname}-%{version}.tar.bz2
-# Source0-md5:	4a9862b5151f16dcad8e30dd6ef08549
+# Source0-md5:	5f4a24eb03789746a13e41beb7044776
 Patch0:		%{realname}-xfonts.patch
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
@@ -34,6 +34,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysprefix		/usr
 %define		_prefix			%{_sysprefix}/%{target}
+%define		_libdir			%{_prefix}/lib
 %define		_pkgconfigdir		%{_prefix}/lib/pkgconfig
 %define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
@@ -85,6 +86,9 @@ export PKG_CONFIG_LIBDIR=%{_pkgconfigdir}
 %install
 rm -rf $RPM_BUILD_ROOT
 
+# missing from make install but required by it
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/pango
+
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -98,7 +102,7 @@ mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
 rm -rf $RPM_BUILD_ROOT%{_datadir}/{gtk-doc,man}
 # useless (modules loaded through libgmodule)
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/1.6.0/modules/*.{la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/pango/1.6.0/modules/*.{la,a}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -106,12 +110,27 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README
-%{_libdir}/libpango*-1.0.dll.a
-%{_libdir}/libpango*-1.0.la
-%{_libdir}/pango*-1.0.def
+%{_libdir}/libpango-1.0.dll.a
+%{_libdir}/libpangocairo-1.0.dll.a
+%{_libdir}/libpangoft2-1.0.dll.a
+%{_libdir}/libpangowin32-1.0.dll.a
+%{_libdir}/libpango-1.0.la
+%{_libdir}/libpangocairo-1.0.la
+%{_libdir}/libpangoft2-1.0.la
+%{_libdir}/libpangowin32-1.0.la
+%{_libdir}/pango-1.0.def
+%{_libdir}/pangocairo-1.0.def
+%{_libdir}/pangoft2-1.0.def
+%{_libdir}/pangowin32-1.0.def
 %{_includedir}/pango-1.0
-%{_pkgconfigdir}/pango*.pc
+%{_pkgconfigdir}/pango.pc
+%{_pkgconfigdir}/pangocairo.pc
+%{_pkgconfigdir}/pangoft2.pc
+%{_pkgconfigdir}/pangowin32.pc
 
 %files dll
 %defattr(644,root,root,755)
-%{_dlldir}/libpango*-1.0-*.dll
+%{_dlldir}/libpango-1.0-*.dll
+%{_dlldir}/libpangocairo-1.0-*.dll
+%{_dlldir}/libpangoft2-1.0-*.dll
+%{_dlldir}/libpangowin32-1.0-*.dll
