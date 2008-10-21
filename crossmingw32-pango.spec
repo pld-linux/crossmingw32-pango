@@ -2,14 +2,13 @@ Summary:	System for layout and rendering of internationalized text - cross Mingw
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla Mingw32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.22.0
+Version:	1.22.1
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.22/%{realname}-%{version}.tar.bz2
-# Source0-md5:	37a185a3cb5c1a39ade7fdc3e6c75349
+# Source0-md5:	654ad7e8d414d36a0e0406935d32c3ab
 Patch0:		%{realname}-xfonts.patch
-Patch1:		%{realname}-lt.patch
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
@@ -75,7 +74,6 @@ Biblioteki DLL pango dla Windows.
 %prep
 %setup -q -n %{realname}-%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
 export PKG_CONFIG_LIBDIR=%{_pkgconfigdir}
