@@ -139,3 +139,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_dlldir}/libpangocairo-1.0-*.dll
 %{_dlldir}/libpangoft2-1.0-*.dll
 %{_dlldir}/libpangowin32-1.0-*.dll
+%{_libdir}/pango/1.6.0/modules/*.dll
