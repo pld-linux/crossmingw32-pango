@@ -1,13 +1,13 @@
-Summary:	System for layout and rendering of internationalized text - cross Mingw32 version
-Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla Mingw32
+Summary:	System for layout and rendering of internationalized text - cross MinGW32 version
+Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.28.0
+Version:	1.28.1
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.28/%{realname}-%{version}.tar.bz2
-# Source0-md5:	545ae8becf7ed74008120f96f4b095f4
+# Source0-md5:	bab5b4eb3fde6b0a5bfe98d25e668741
 Patch0:		%{realname}-xfonts.patch
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
@@ -49,11 +49,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 System for layout and rendering of internationalized text (cross
-mingw32 version).
+MinGW32 version).
 
 %description -l pl.UTF-8
 System obsługi i renderowania międzynarodowego tekstu (wersja skrośna
-mingw32).
+MinGW32).
 
 %package dll
 Summary:	DLL pango libraries for Windows
