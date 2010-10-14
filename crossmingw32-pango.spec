@@ -2,12 +2,12 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.28.2
+Version:	1.28.3
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.28/%{realname}-%{version}.tar.bz2
-# Source0-md5:	564bfc0fdefc718d58414bfe7590cd1a
+# Source0-md5:	caa74baea47e7e16bc73c89f9089d522
 Patch0:		%{realname}-xfonts.patch
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
