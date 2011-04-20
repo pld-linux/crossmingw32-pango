@@ -2,12 +2,12 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.28.3
+Version:	1.28.4
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.28/%{realname}-%{version}.tar.bz2
-# Source0-md5:	caa74baea47e7e16bc73c89f9089d522
+# Source0-md5:	3f3989700f04e9117d30544a9078b3a0
 Patch0:		%{realname}-xfonts.patch
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
@@ -16,7 +16,9 @@ BuildRequires:	crossmingw32-cairo >= 1.8.0
 BuildRequires:	crossmingw32-fontconfig >= 2.5.0
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-gcc
-BuildRequires:	crossmingw32-glib2 >= 2.18.0
+# opentype code uses C++ (but no STL)
+BuildRequires:	crossmingw32-gcc-c++
+BuildRequires:	crossmingw32-glib2 >= 2.24.0
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.15
@@ -24,7 +26,7 @@ BuildRequires:	rpmbuild(macros) >= 1.197
 Requires:	crossmingw32-cairo >= 1.8.0
 Requires:	crossmingw32-fontconfig >= 2.5.0
 Requires:	crossmingw32-freetype >= 2.1.7
-Requires:	crossmingw32-glib2 >= 2.18.0
+Requires:	crossmingw32-glib2 >= 2.24.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -62,7 +64,7 @@ Group:		Applications/Emulators
 Requires:	crossmingw32-cairo-dll >= 1.8.0
 Requires:	crossmingw32-fontconfig-dll >= 2.5.0
 Requires:	crossmingw32-freetype-dll >= 2.1.7
-Requires:	crossmingw32-glib2-dll >= 2.18.0
+Requires:	crossmingw32-glib2-dll >= 2.24.0
 Requires:	wine
 
 %description dll
