@@ -2,13 +2,12 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.30.1
+Version:	1.32.1
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.30/%{realname}-%{version}.tar.xz
-# Source0-md5:	ec3c1f236ee9bd4a982a5f46fcaff7b9
-Patch0:		%{realname}-xfonts.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.32/%{realname}-%{version}.tar.xz
+# Source0-md5:	73570ab28462fc43960a8d1ffdae43d0
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
@@ -16,9 +15,8 @@ BuildRequires:	crossmingw32-cairo >= 1.8.0
 BuildRequires:	crossmingw32-fontconfig >= 2.5.0
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-gcc
-# opentype code uses C++ (but no STL)
-BuildRequires:	crossmingw32-gcc-c++
-BuildRequires:	crossmingw32-glib2 >= 2.32.0
+BuildRequires:	crossmingw32-glib2 >= 2.34.0
+BuildRequires:	crossmingw32-harfbuzz >= 0.9.3
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.15
@@ -28,7 +26,8 @@ BuildRequires:	xz
 Requires:	crossmingw32-cairo >= 1.8.0
 Requires:	crossmingw32-fontconfig >= 2.5.0
 Requires:	crossmingw32-freetype >= 2.1.7
-Requires:	crossmingw32-glib2 >= 2.32.0
+Requires:	crossmingw32-glib2 >= 2.34.0
+Requires:	crossmingw32-harfbuzz >= 0.9.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -48,8 +47,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # arch-specific flags (like alpha's -mieee) are not valid for i386 gcc
 %define		optflags	-O2
 %endif
-# -z options are invalid for mingw linker
+# -z options are invalid for mingw linker, most of -f options are Linux-specific
 %define		filterout_ld	-Wl,-z,.*
+%define		filterout_c	-f[-a-z0-9=]*
 
 %description
 System for layout and rendering of internationalized text (cross
@@ -66,7 +66,8 @@ Group:		Applications/Emulators
 Requires:	crossmingw32-cairo-dll >= 1.8.0
 Requires:	crossmingw32-fontconfig-dll >= 2.5.0
 Requires:	crossmingw32-freetype-dll >= 2.1.7
-Requires:	crossmingw32-glib2-dll >= 2.32.0
+Requires:	crossmingw32-glib2-dll >= 2.34.0
+Requires:	crossmingw32-harfbuzz-dll >= 0.9.3
 Requires:	wine
 
 %description dll
@@ -77,7 +78,6 @@ Biblioteki DLL pango dla Windows.
 
 %prep
 %setup -q -n %{realname}-%{version}
-%patch0 -p1
 
 %build
 export PKG_CONFIG_LIBDIR=%{_pkgconfigdir}
@@ -105,14 +105,19 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/pango
 install -d $RPM_BUILD_ROOT%{_dlldir}
 mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
+# omitted from make install
+for f in pango pangocairo pangoft2 pangowin32 ; do
+	cp -p pango/${f}.def $RPM_BUILD_ROOT%{_libdir}/${f}-1.0.def
+done
+
 %if 0%{!?debug:1}
 %{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
 %endif
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/{gtk-doc,man}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{gtk-doc,man}
 # useless (modules loaded through libgmodule)
-rm -f $RPM_BUILD_ROOT%{_libdir}/pango/1.6.0/modules/*.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/pango/1.8.0/modules/*.{la,a}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -145,6 +150,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_dlldir}/libpangoft2-1.0-*.dll
 %{_dlldir}/libpangowin32-1.0-*.dll
 %dir %{_libdir}/pango
-%dir %{_libdir}/pango/1.6.0
-%dir %{_libdir}/pango/1.6.0/modules
-%{_libdir}/pango/1.6.0/modules/*.dll
+%dir %{_libdir}/pango/1.8.0
+%dir %{_libdir}/pango/1.8.0/modules
+%{_libdir}/pango/1.8.0/modules/*.dll
