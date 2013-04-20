@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośn
 %define		realname   pango
 Name:		crossmingw32-%{realname}
 Version:	1.34.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.34/%{realname}-%{version}.tar.xz
@@ -42,6 +42,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_dlldir			/usr/share/wine/windows/system
 %define		__cc			%{target}-gcc
 %define		__cxx			%{target}-g++
+%define		__pkgconfig_provides	%{nil}
 
 %ifnarch %{ix86}
 # arch-specific flags (like alpha's -mieee) are not valid for i386 gcc
