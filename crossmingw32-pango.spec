@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośn
 %define		realname   pango
 Name:		crossmingw32-%{realname}
 Version:	1.36.8
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.36/%{realname}-%{version}.tar.xz
