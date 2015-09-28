@@ -2,12 +2,12 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.36.8
-Release:	3
+Version:	1.38.0
+Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.36/%{realname}-%{version}.tar.xz
-# Source0-md5:	217a9a753006275215fa9fa127760ece
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.38/%{realname}-%{version}.tar.xz
+# Source0-md5:	5a358e5afbb6b2e82cf2cb02ca9cce86
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
@@ -99,9 +99,6 @@ export PKG_CONFIG_LIBDIR=%{_pkgconfigdir}
 %install
 rm -rf $RPM_BUILD_ROOT
 
-# missing from make install but required by it
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/pango
-
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -119,8 +116,6 @@ done
 %endif
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{gtk-doc,man}
-# useless (modules loaded through libgmodule)
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/pango/1.8.0/modules/*.{la,a}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -152,7 +147,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_dlldir}/libpangocairo-1.0-*.dll
 %{_dlldir}/libpangoft2-1.0-*.dll
 %{_dlldir}/libpangowin32-1.0-*.dll
-%dir %{_libdir}/pango
-%dir %{_libdir}/pango/1.8.0
-%dir %{_libdir}/pango/1.8.0/modules
-%{_libdir}/pango/1.8.0/modules/*.dll
