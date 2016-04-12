@@ -2,21 +2,22 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.38.1
+Version:	1.40.1
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.38/%{realname}-%{version}.tar.xz
-# Source0-md5:	7fde35d4a127b55ce8bbcefe109bc80d
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.40/%{realname}-%{version}.tar.xz
+# Source0-md5:	6fc88c6529890d6c8e03074d57a3eceb
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
+# cairo-ft cairo-pdf cairo-png cairo-ps cairo-win32
 BuildRequires:	crossmingw32-cairo >= 1.12.10
 BuildRequires:	crossmingw32-fontconfig >= 2.10.91
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-glib2 >= 2.34.0
-BuildRequires:	crossmingw32-harfbuzz >= 0.9.9
+BuildRequires:	crossmingw32-harfbuzz >= 0.9.30
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.15
@@ -27,7 +28,7 @@ Requires:	crossmingw32-cairo >= 1.12.10
 Requires:	crossmingw32-fontconfig >= 2.10.91
 Requires:	crossmingw32-freetype >= 2.1.7
 Requires:	crossmingw32-glib2 >= 2.34.0
-Requires:	crossmingw32-harfbuzz >= 0.9.9
+Requires:	crossmingw32-harfbuzz >= 0.9.30
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -70,7 +71,7 @@ Requires:	crossmingw32-cairo-dll >= 1.12.10
 Requires:	crossmingw32-fontconfig-dll >= 2.10.91
 Requires:	crossmingw32-freetype-dll >= 2.1.7
 Requires:	crossmingw32-glib2-dll >= 2.34.0
-Requires:	crossmingw32-harfbuzz-dll >= 0.9.9
+Requires:	crossmingw32-harfbuzz-dll >= 0.9.30
 Requires:	wine
 
 %description dll
