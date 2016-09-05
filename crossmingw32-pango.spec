@@ -2,12 +2,12 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.40.1
+Version:	1.40.2
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.40/%{realname}-%{version}.tar.xz
-# Source0-md5:	6fc88c6529890d6c8e03074d57a3eceb
+# Source0-md5:	c4fa70815b0105f876aa9e89b5ae33a5
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
@@ -106,11 +106,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_dlldir}
 mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
-# omitted from make install
-for f in pango pangocairo pangoft2 pangowin32 ; do
-	cp -p pango/${f}.def $RPM_BUILD_ROOT%{_libdir}/${f}-1.0.def
-done
-
 %if 0%{!?debug:1}
 %{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
@@ -132,10 +127,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpangocairo-1.0.la
 %{_libdir}/libpangoft2-1.0.la
 %{_libdir}/libpangowin32-1.0.la
-%{_libdir}/pango-1.0.def
-%{_libdir}/pangocairo-1.0.def
-%{_libdir}/pangoft2-1.0.def
-%{_libdir}/pangowin32-1.0.def
 %{_includedir}/pango-1.0
 %{_pkgconfigdir}/pango.pc
 %{_pkgconfigdir}/pangocairo.pc
