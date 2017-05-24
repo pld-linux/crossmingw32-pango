@@ -2,12 +2,12 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.40.5
+Version:	1.40.6
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.40/%{realname}-%{version}.tar.xz
-# Source0-md5:	11fb1e94c486507a94c4a905d86e70ce
+# Source0-md5:	507c6746fbf53fc9d48c577f1e265de3
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
@@ -17,7 +17,7 @@ BuildRequires:	crossmingw32-fontconfig >= 2.10.91
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-glib2 >= 2.34.0
-BuildRequires:	crossmingw32-harfbuzz >= 0.9.30
+BuildRequires:	crossmingw32-harfbuzz >= 1.2.3
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.15
@@ -28,7 +28,7 @@ Requires:	crossmingw32-cairo >= 1.12.10
 Requires:	crossmingw32-fontconfig >= 2.10.91
 Requires:	crossmingw32-freetype >= 2.1.7
 Requires:	crossmingw32-glib2 >= 2.34.0
-Requires:	crossmingw32-harfbuzz >= 0.9.30
+Requires:	crossmingw32-harfbuzz >= 1.2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -71,7 +71,7 @@ Requires:	crossmingw32-cairo-dll >= 1.12.10
 Requires:	crossmingw32-fontconfig-dll >= 2.10.91
 Requires:	crossmingw32-freetype-dll >= 2.1.7
 Requires:	crossmingw32-glib2-dll >= 2.34.0
-Requires:	crossmingw32-harfbuzz-dll >= 0.9.30
+Requires:	crossmingw32-harfbuzz-dll >= 1.2.3
 Requires:	wine
 
 %description dll
@@ -104,13 +104,14 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_dlldir}
-mv -f $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
+%{__mv} $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
 %if 0%{!?debug:1}
 %{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
 %endif
 
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/pango-view.exe
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{gtk-doc,man}
 
 %clean
