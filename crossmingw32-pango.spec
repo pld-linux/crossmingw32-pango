@@ -2,22 +2,25 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.40.14
+Version:	1.42.4
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.40/%{realname}-%{version}.tar.xz
-# Source0-md5:	18d7eb8d52e7e445e733c109ddaa7b78
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.42/%{realname}-%{version}.tar.xz
+# Source0-md5:	deb171a31a3ad76342d5195a1b5bbc7c
 URL:		http://www.pango.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
 # cairo-ft cairo-pdf cairo-png cairo-ps cairo-win32
 BuildRequires:	crossmingw32-cairo >= 1.12.10
-BuildRequires:	crossmingw32-fontconfig >= 2.10.91
+BuildRequires:	crossmingw32-fontconfig >= 2.11.91
 BuildRequires:	crossmingw32-freetype >= 2.1.7
+BuildRequires:	crossmingw32-fribidi >= 0.19.7
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-glib2 >= 2.34.0
-BuildRequires:	crossmingw32-harfbuzz >= 1.2.3
+BuildRequires:	crossmingw32-harfbuzz >= 1.4.2
+# glib-genmarshal, glib-mkenums
+BuildRequires:	glib2-devel >= 1:2.34.0
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.15
@@ -25,10 +28,11 @@ BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	crossmingw32-cairo >= 1.12.10
-Requires:	crossmingw32-fontconfig >= 2.10.91
+Requires:	crossmingw32-fontconfig >= 2.11.91
 Requires:	crossmingw32-freetype >= 2.1.7
+Requires:	crossmingw32-fribidi >= 0.19.7
 Requires:	crossmingw32-glib2 >= 2.34.0
-Requires:	crossmingw32-harfbuzz >= 1.2.3
+Requires:	crossmingw32-harfbuzz >= 1.4.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -68,10 +72,11 @@ Summary:	DLL pango libraries for Windows
 Summary(pl.UTF-8):	Biblioteki DLL pango dla Windows
 Group:		Applications/Emulators
 Requires:	crossmingw32-cairo-dll >= 1.12.10
-Requires:	crossmingw32-fontconfig-dll >= 2.10.91
+Requires:	crossmingw32-fontconfig-dll >= 2.11.91
 Requires:	crossmingw32-freetype-dll >= 2.1.7
+Requires:	crossmingw32-fribidi-dll >= 0.19.7
 Requires:	crossmingw32-glib2-dll >= 2.34.0
-Requires:	crossmingw32-harfbuzz-dll >= 1.2.3
+Requires:	crossmingw32-harfbuzz-dll >= 1.4.2
 Requires:	wine
 
 %description dll
@@ -95,7 +100,9 @@ export PKG_CONFIG_LIBDIR=%{_pkgconfigdir}
 	--host=%{target} \
 	--disable-silent-rules
 
-%{__make}
+%{__make} \
+	GLIB_GENMARSHAL=/usr/bin/glib-genmarshal \
+	GLIB_MKENUMS=/usr/bin/glib-mkenums
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -111,7 +118,7 @@ install -d $RPM_BUILD_ROOT%{_dlldir}
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
 %endif
 
-%{__rm} $RPM_BUILD_ROOT%{_bindir}/pango-view.exe
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/pango-{list,view}.exe
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/{gtk-doc,man}
 
 %clean
