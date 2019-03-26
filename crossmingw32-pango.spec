@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośn
 %define		realname   pango
 Name:		crossmingw32-%{realname}
 Version:	1.42.4
-Release:	2
+Release:	3
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.42/%{realname}-%{version}.tar.xz
@@ -113,6 +113,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_dlldir}
 %{__mv} $RPM_BUILD_ROOT%{_prefix}/bin/*.dll $RPM_BUILD_ROOT%{_dlldir}
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libpango*.la
+
 %if 0%{!?debug:1}
 %{target}-strip --strip-unneeded -R.comment -R.note $RPM_BUILD_ROOT%{_dlldir}/*.dll
 %{target}-strip -g -R.comment -R.note $RPM_BUILD_ROOT%{_libdir}/*.a
@@ -131,10 +133,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpangocairo-1.0.dll.a
 %{_libdir}/libpangoft2-1.0.dll.a
 %{_libdir}/libpangowin32-1.0.dll.a
-%{_libdir}/libpango-1.0.la
-%{_libdir}/libpangocairo-1.0.la
-%{_libdir}/libpangoft2-1.0.la
-%{_libdir}/libpangowin32-1.0.la
 %{_includedir}/pango-1.0
 %{_pkgconfigdir}/pango.pc
 %{_pkgconfigdir}/pangocairo.pc
