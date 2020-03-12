@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośn
 %define		realname   pango
 Name:		crossmingw32-%{realname}
 Version:	1.44.7
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.44/%{realname}-%{version}.tar.xz
@@ -16,7 +16,7 @@ BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-fribidi >= 0.19.7
 BuildRequires:	crossmingw32-gcc
 BuildRequires:	crossmingw32-glib2 >= 2.59.2
-BuildRequires:	crossmingw32-harfbuzz >= 2.0.0
+BuildRequires:	crossmingw32-harfbuzz >= 2.6.0
 BuildRequires:	crossmingw32-w32api >= 5.0.2-6
 # glib-genmarshal, glib-mkenums
 BuildRequires:	glib2-devel >= 1:2.59.2
@@ -32,7 +32,7 @@ Requires:	crossmingw32-fontconfig >= 2.11.91
 Requires:	crossmingw32-freetype >= 2.1.7
 Requires:	crossmingw32-fribidi >= 0.19.7
 Requires:	crossmingw32-glib2 >= 2.59.2
-Requires:	crossmingw32-harfbuzz >= 2.0.0
+Requires:	crossmingw32-harfbuzz >= 2.6.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -87,7 +87,7 @@ Requires:	crossmingw32-fontconfig-dll >= 2.11.91
 Requires:	crossmingw32-freetype-dll >= 2.1.7
 Requires:	crossmingw32-fribidi-dll >= 0.19.7
 Requires:	crossmingw32-glib2-dll >= 2.59.2
-Requires:	crossmingw32-harfbuzz-dll >= 2.0.0
+Requires:	crossmingw32-harfbuzz-dll >= 2.6.0
 Requires:	wine
 
 %description dll
