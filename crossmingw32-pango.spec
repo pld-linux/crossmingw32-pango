@@ -2,16 +2,16 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.46.2
+Version:	1.48.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.46/%{realname}-%{version}.tar.xz
-# Source0-md5:	990bedb35be6c2c19f770812cac96de5
+Source0:	https://download.gnome.org/sources/pango/1.48/%{realname}-%{version}.tar.xz
+# Source0-md5:	ee5826242abd661fb5238e19b9e2e1aa
 URL:		https://pango.gnome.org/
 # cairo-ft cairo-pdf cairo-png cairo-ps cairo-win32
 BuildRequires:	crossmingw32-cairo >= 1.12.10
-BuildRequires:	crossmingw32-fontconfig >= 2.11.91
+BuildRequires:	crossmingw32-fontconfig >= 2.12.92
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-fribidi >= 0.19.7
 BuildRequires:	crossmingw32-gcc
@@ -20,7 +20,7 @@ BuildRequires:	crossmingw32-harfbuzz >= 2.6.0
 BuildRequires:	crossmingw32-w32api >= 5.0.2-6
 # glib-genmarshal, glib-mkenums
 BuildRequires:	glib2-devel >= 1:2.60.0
-BuildRequires:	meson >= 0.50.0-2
+BuildRequires:	meson >= 0.54.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.15
@@ -28,7 +28,7 @@ BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	crossmingw32-cairo >= 1.12.10
-Requires:	crossmingw32-fontconfig >= 2.11.91
+Requires:	crossmingw32-fontconfig >= 2.12.92
 Requires:	crossmingw32-freetype >= 2.1.7
 Requires:	crossmingw32-fribidi >= 0.19.7
 Requires:	crossmingw32-glib2 >= 2.60.0
@@ -83,7 +83,7 @@ Summary:	DLL pango libraries for Windows
 Summary(pl.UTF-8):	Biblioteki DLL pango dla Windows
 Group:		Applications/Emulators
 Requires:	crossmingw32-cairo-dll >= 1.12.10
-Requires:	crossmingw32-fontconfig-dll >= 2.11.91
+Requires:	crossmingw32-fontconfig-dll >= 2.12.92
 Requires:	crossmingw32-freetype-dll >= 2.1.7
 Requires:	crossmingw32-fribidi-dll >= 0.19.7
 Requires:	crossmingw32-glib2-dll >= 2.60.0
@@ -121,7 +121,7 @@ export PKG_CONFIG_LIBDIR=%{_pkgconfigdir}
 	--cross-file meson-cross.txt \
 	%{?debug:--debug} \
 	-Dgtk_doc=false \
-	-Dintrospection=false
+	-Dintrospection=disabled
 
 %ninja_build -C build
 
