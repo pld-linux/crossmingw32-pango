@@ -2,12 +2,12 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.48.0
+Version:	1.48.1
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	https://download.gnome.org/sources/pango/1.48/%{realname}-%{version}.tar.xz
-# Source0-md5:	ee5826242abd661fb5238e19b9e2e1aa
+# Source0-md5:	97aea993f74241820bfeb07db6c3332b
 URL:		https://pango.gnome.org/
 # cairo-ft cairo-pdf cairo-png cairo-ps cairo-win32
 BuildRequires:	crossmingw32-cairo >= 1.12.10
@@ -15,12 +15,12 @@ BuildRequires:	crossmingw32-fontconfig >= 2.12.92
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-fribidi >= 0.19.7
 BuildRequires:	crossmingw32-gcc
-BuildRequires:	crossmingw32-glib2 >= 2.60.0
+BuildRequires:	crossmingw32-glib2 >= 2.62.0
 BuildRequires:	crossmingw32-harfbuzz >= 2.6.0
 BuildRequires:	crossmingw32-w32api >= 5.0.2-6
 # glib-genmarshal, glib-mkenums
-BuildRequires:	glib2-devel >= 1:2.60.0
-BuildRequires:	meson >= 0.54.0
+BuildRequires:	glib2-devel >= 1:2.62.0
+BuildRequires:	meson >= 0.55.3
 BuildRequires:	ninja >= 1.5
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.15
@@ -31,7 +31,7 @@ Requires:	crossmingw32-cairo >= 1.12.10
 Requires:	crossmingw32-fontconfig >= 2.12.92
 Requires:	crossmingw32-freetype >= 2.1.7
 Requires:	crossmingw32-fribidi >= 0.19.7
-Requires:	crossmingw32-glib2 >= 2.60.0
+Requires:	crossmingw32-glib2 >= 2.62.0
 Requires:	crossmingw32-harfbuzz >= 2.6.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -86,7 +86,7 @@ Requires:	crossmingw32-cairo-dll >= 1.12.10
 Requires:	crossmingw32-fontconfig-dll >= 2.12.92
 Requires:	crossmingw32-freetype-dll >= 2.1.7
 Requires:	crossmingw32-fribidi-dll >= 0.19.7
-Requires:	crossmingw32-glib2-dll >= 2.60.0
+Requires:	crossmingw32-glib2-dll >= 2.62.0
 Requires:	crossmingw32-harfbuzz-dll >= 2.6.0
 Requires:	wine
 
