@@ -45,6 +45,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_libdir			%{_prefix}/lib
 %define		_pkgconfigdir		%{_prefix}/lib/pkgconfig
 %define		_dlldir			/usr/share/wine/windows/system
+# rpm.org needs redefining these (redefining _prefix don't change them)
+%define		_bindir			%{_prefix}/bin
+%define		_sbindir		%{_prefix}/sbin
+%define		_includedir		%{_prefix}/include
+%define		_libexecdir		%{_prefix}/libexec
+%define		_datadir		%{_prefix}/share
+%define		_infodir		%{_datadir}/info
+%define		_mandir			%{_datadir}/man
 %define		__pkgconfig_provides	%{nil}
 %define		__pkgconfig_requires	%{nil}
 # for meson 0.50+, keep __cc/__cxx as host compiler and pass %{target}-* in meson-cross.txt
@@ -57,6 +65,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # -z options are invalid for mingw linker, most of -f options are Linux-specific
 %define		filterout_ld	-Wl,-z,.*
 %define		filterout_c	-f[-a-z0-9=]*
+%define		_enable_debug_packages	0
 
 %description
 System for layout and rendering of internationalized text (cross
