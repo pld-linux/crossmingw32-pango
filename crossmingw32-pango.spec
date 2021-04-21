@@ -15,11 +15,11 @@ BuildRequires:	crossmingw32-fontconfig >= 2.12.92
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-fribidi >= 0.19.7
 BuildRequires:	crossmingw32-gcc
-BuildRequires:	crossmingw32-glib2 >= 2.62.0
+BuildRequires:	crossmingw32-glib2 >= 2.68.0
 BuildRequires:	crossmingw32-harfbuzz >= 2.6.0
 BuildRequires:	crossmingw32-w32api >= 5.0.2-6
 # glib-genmarshal, glib-mkenums
-BuildRequires:	glib2-devel >= 1:2.62.0
+BuildRequires:	glib2-devel >= 1:2.68.0
 BuildRequires:	meson >= 0.55.3
 BuildRequires:	ninja >= 1.5
 BuildRequires:	perl-base
@@ -31,7 +31,7 @@ Requires:	crossmingw32-cairo >= 1.12.10
 Requires:	crossmingw32-fontconfig >= 2.12.92
 Requires:	crossmingw32-freetype >= 2.1.7
 Requires:	crossmingw32-fribidi >= 0.19.7
-Requires:	crossmingw32-glib2 >= 2.62.0
+Requires:	crossmingw32-glib2 >= 2.68.0
 Requires:	crossmingw32-harfbuzz >= 2.6.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -87,7 +87,7 @@ Requires:	crossmingw32-cairo-dll >= 1.12.10
 Requires:	crossmingw32-fontconfig-dll >= 2.12.92
 Requires:	crossmingw32-freetype-dll >= 2.1.7
 Requires:	crossmingw32-fribidi-dll >= 0.19.7
-Requires:	crossmingw32-glib2-dll >= 2.62.0
+Requires:	crossmingw32-glib2-dll >= 2.68.0
 Requires:	crossmingw32-harfbuzz-dll >= 2.6.0
 Requires:	wine
 
