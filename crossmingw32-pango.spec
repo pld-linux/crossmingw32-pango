@@ -3,11 +3,12 @@ Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośn
 %define		realname   pango
 Name:		crossmingw32-%{realname}
 Version:	1.50.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	https://download.gnome.org/sources/pango/1.50/%{realname}-%{version}.tar.xz
 # Source0-md5:	726a7c7b6faf34006d2b5aa0dd8dc1d5
+Patch0:		pango-x32.patch
 URL:		https://pango.gnome.org/
 # cairo-ft cairo-pdf cairo-png cairo-ps cairo-win32
 BuildRequires:	crossmingw32-cairo >= 1.12.10
@@ -103,6 +104,7 @@ Biblioteki DLL pango dla Windows.
 
 %prep
 %setup -q -n %{realname}-%{version}
+%patch0 -p1
 
 # disable unused gi-docgen subproject
 %{__sed} -i -e '/fallback:.*gi-docgen/d' meson.build
