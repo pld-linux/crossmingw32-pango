@@ -2,16 +2,16 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.48.10
+Version:	1.50.0
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-Source0:	https://download.gnome.org/sources/pango/1.48/%{realname}-%{version}.tar.xz
-# Source0-md5:	dbc8e76c18da6d7bbb7dab8d5200d83b
+Source0:	https://download.gnome.org/sources/pango/1.50/%{realname}-%{version}.tar.xz
+# Source0-md5:	726a7c7b6faf34006d2b5aa0dd8dc1d5
 URL:		https://pango.gnome.org/
 # cairo-ft cairo-pdf cairo-png cairo-ps cairo-win32
 BuildRequires:	crossmingw32-cairo >= 1.12.10
-BuildRequires:	crossmingw32-fontconfig >= 2.12.92
+BuildRequires:	crossmingw32-fontconfig >= 2.13.0
 BuildRequires:	crossmingw32-freetype >= 2.1.7
 BuildRequires:	crossmingw32-fribidi >= 1.0.6
 BuildRequires:	crossmingw32-gcc
@@ -30,7 +30,7 @@ BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	crossmingw32-cairo >= 1.12.10
-Requires:	crossmingw32-fontconfig >= 2.12.92
+Requires:	crossmingw32-fontconfig >= 2.13.0
 Requires:	crossmingw32-freetype >= 2.1.7
 Requires:	crossmingw32-fribidi >= 1.0.6
 #Requires:	crossmingw32-glib2 >= 2.68.0
@@ -87,7 +87,7 @@ Summary:	DLL pango libraries for Windows
 Summary(pl.UTF-8):	Biblioteki DLL pango dla Windows
 Group:		Applications/Emulators
 Requires:	crossmingw32-cairo-dll >= 1.12.10
-Requires:	crossmingw32-fontconfig-dll >= 2.12.92
+Requires:	crossmingw32-fontconfig-dll >= 2.13.0
 Requires:	crossmingw32-freetype-dll >= 2.1.7
 Requires:	crossmingw32-fribidi-dll >= 1.0.6
 #Requires:	crossmingw32-glib2-dll >= 2.68.0
