@@ -2,12 +2,12 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
-Version:	1.50.0
-Release:	2
+Version:	1.50.1
+Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	https://download.gnome.org/sources/pango/1.50/%{realname}-%{version}.tar.xz
-# Source0-md5:	726a7c7b6faf34006d2b5aa0dd8dc1d5
+# Source0-md5:	56bef4e962c944d008b289e5613beb7f
 Patch0:		pango-x32.patch
 URL:		https://pango.gnome.org/
 # cairo-ft cairo-pdf cairo-png cairo-ps cairo-win32
