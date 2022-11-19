@@ -2,6 +2,7 @@ Summary:	System for layout and rendering of internationalized text - cross MinGW
 Summary(pl.UTF-8):	System renderowania międzynarodowego tekstu - wersja skrośna dla MinGW32
 %define		realname   pango
 Name:		crossmingw32-%{realname}
+# warning: 1.50.12 requires dwrite
 Version:	1.50.11
 Release:	1
 License:	LGPL v2+
